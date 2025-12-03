@@ -3,15 +3,18 @@
 #include <fstream>
 #include <cmath>
 #include <vector>
+#include <chrono>
+
+using namespace std::chrono;
 
 long long calc_joltage(std::vector<int>& data, int num_digits)
 {
-    std::vector<long long> digits;
+    std::vector<int> digits;
     
-    int pos = -1;
+    int pos = 0;
     for(int d = 0; d < num_digits; d++){
         int digit = -1;
-        for(int i = pos + 1; i < data.size() - num_digits + d + 1; i++)
+        for(int i = pos; i < data.size() - num_digits + d + 1; i++)
         {
             if(data[i] > digit)
             {
@@ -20,6 +23,7 @@ long long calc_joltage(std::vector<int>& data, int num_digits)
             }
         }
         digits.push_back(digit);
+        pos++;
     }
 
     long long total = 0;
@@ -34,12 +38,14 @@ long long calc_joltage(std::vector<int>& data, int num_digits)
 }
 
 int main() {
+    auto start = std::chrono::high_resolution_clock::now();
     std::fstream in_file("data/aoc/day3.txt");
 
     std::string line;
 
     long long total_joltage_p1 = 0;
     long long total_joltage_p2 = 0;
+    
     while(std::getline(in_file, line))
     {
         std::vector<int> data;
@@ -50,8 +56,13 @@ int main() {
         total_joltage_p1 += calc_joltage(data, 2);
         total_joltage_p2 += calc_joltage(data, 12);
     }
+    auto stop = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+
     std::cout << "Total joltage part1: " << total_joltage_p1 << std::endl;
     std::cout << "Total joltage part2: " << total_joltage_p2 << std::endl;
+
+    std::cout << "Time (µs): " << duration.count() << std::endl;
 
     return 0;
 }
