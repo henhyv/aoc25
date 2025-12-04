@@ -8,13 +8,13 @@
 using namespace std::chrono;
 
 bool valid_roll(std::vector<std::string>& data, int x, int y){
-    int rows = data.size();
-    int columns = data[0].size();
-    
     if(data[y][x] != '@')
     {
         return false;
     }
+    int rows = data.size();
+    int columns = data[0].size();
+    
     int rollCount = 0;
     int radius = 1;
     for(int xOff = std::max(x - radius, 0); xOff < std::min(x + radius + 1, columns); xOff++)
@@ -66,10 +66,6 @@ int part2_remove_rolls(std::vector<std::string>& data)
         {
             for(int y = 0; y < rows; y++)
             {
-                if(data[y][x] != '@')
-                {
-                    continue;
-                }
                 if(valid_roll(data, x, y))
                 {
                     data[y][x] = '.';
