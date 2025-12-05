@@ -6,36 +6,40 @@
 #include <algorithm>
 #include <chrono>
 
-void part1(){
+int main()
+{
     auto start = std::chrono::high_resolution_clock::now();
-    //std::fstream in_file("data/aoc/day5_test.txt");
+    // std::fstream in_file("data/aoc/day5_test.txt");
     std::fstream in_file("data/aoc/day5.txt");
-    
+
     std::string line;
 
     std::list<std::pair<long long, long long>> ranges;
-    while(std::getline(in_file, line))
+    while (std::getline(in_file, line))
     {
         // Empty line marks end of the ranges section
-        if(line.length() == 0){
+        if (line.length() == 0)
+        {
             break;
         }
         std::string delimiter = ">=";
         int pos = line.find('-');
         long long first = std::stoll(line.substr(0, pos));
-        long long second = std::stoll(line.substr(pos+1, line.length()));
+        long long second = std::stoll(line.substr(pos + 1, line.length()));
 
         ranges.emplace_back(first, second);
     }
     int found_count = 0;
 
     // Part 1
-    while(std::getline(in_file, line))
+    while (std::getline(in_file, line))
     {
         auto ingredient = std::stoll(line);
         auto range = ranges.begin();
-        while(range != ranges.end()){
-            if(ingredient >= range->first && ingredient <= range->second){
+        while (range != ranges.end())
+        {
+            if (ingredient >= range->first && ingredient <= range->second)
+            {
                 found_count++;
                 break;
             }
@@ -45,19 +49,19 @@ void part1(){
 
     // Part 2
     // Sort the ranges by the first element to make merging easier
-    ranges.sort([](auto a, auto b){return a.first < b.first;});
+    ranges.sort([](auto a, auto b){ return a.first < b.first; });
 
     long long total_ingredients = 0;
     auto range1 = ranges.begin();
-    while(range1 != ranges.end())
+    while (range1 != ranges.end())
     {
         auto range2 = std::next(range1);
-        
+
         // Find if there's overlap
-        if(range2 != ranges.end() && range1->second >= range2->first)
+        if (range2 != ranges.end() && range1->second >= range2->first)
         {
             // Merge second range into first range, then remove second range
-            //std::cout << "Merging\n " << range1->first << "-" << range1->second << "\n " << range2->first << "-" << range2->second << std::endl;
+            // std::cout << "Merging\n " << range1->first << "-" << range1->second << "\n " << range2->first << "-" << range2->second << std::endl;
             range1->second = std::max(range1->second, range2->second);
             ranges.erase(range2);
         }
@@ -74,14 +78,6 @@ void part1(){
     std::cout << "Part 1 good ingredients: " << found_count << std::endl;
     std::cout << "Part 2 total ingredients: " << total_ingredients << std::endl;
     std::cout << "Time (µs): " << duration.count() << std::endl;
-}
-
-void part2(){
-    // TODO
-}
-
-int main() {
-    part1();
 
     return 0;
 }
