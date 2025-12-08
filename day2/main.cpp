@@ -48,7 +48,7 @@ long long part1_count_in_range(long long first, long long second){
 }
 
 void part1(){
-    std::fstream in_file("data/aoc/day2.txt");
+    std::fstream in_file("day2/day2.txt");
     //std::fstream in_file("data/aoc/day2_test.txt");
     
     int dial = 50;

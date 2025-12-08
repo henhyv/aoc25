@@ -3,7 +3,7 @@
 #include <fstream>
 
 int main() {
-    std::fstream in_file("data/aoc/day1.txt");
+    std::fstream in_file("day1/day1.txt");
     
     int dial = 50;
     int zeroes_part1 = 0;

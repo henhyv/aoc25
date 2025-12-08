@@ -85,7 +85,7 @@ int part2_remove_rolls(std::vector<std::string>& data)
 
 int main() {
     auto start = std::chrono::high_resolution_clock::now();
-    std::fstream in_file("data/aoc/day4.txt");
+    std::fstream in_file("day4/day4.txt");
     
     std::vector<std::string> data;
     std::string line;

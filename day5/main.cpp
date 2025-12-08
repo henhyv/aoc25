@@ -9,8 +9,7 @@
 int main()
 {
     auto start = std::chrono::high_resolution_clock::now();
-    // std::fstream in_file("data/aoc/day5_test.txt");
-    std::fstream in_file("data/aoc/day5.txt");
+    std::fstream in_file("day5/day5.txt");
 
     std::string line;
 
@@ -22,7 +21,6 @@ int main()
         {
             break;
         }
-        std::string delimiter = ">=";
         int pos = line.find('-');
         long long first = std::stoll(line.substr(0, pos));
         long long second = std::stoll(line.substr(pos + 1, line.length()));
@@ -46,6 +44,8 @@ int main()
             range++;
         }
     }
+    
+    auto p2_start = std::chrono::high_resolution_clock::now();
 
     // Part 2
     // Sort the ranges by the first element to make merging easier
@@ -74,9 +74,11 @@ int main()
     }
     auto stop = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+    auto p2_duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - p2_start);
 
     std::cout << "Part 1 good ingredients: " << found_count << std::endl;
     std::cout << "Part 2 total ingredients: " << total_ingredients << std::endl;
+    std::cout << "P2 time (µs): " << duration.count() << std::endl;
     std::cout << "Time (µs): " << duration.count() << std::endl;
 
     return 0;

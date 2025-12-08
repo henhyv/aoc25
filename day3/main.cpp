@@ -39,7 +39,7 @@ long long calc_joltage(std::vector<int>& data, int num_digits)
 
 int main() {
     auto start = std::chrono::high_resolution_clock::now();
-    std::fstream in_file("data/aoc/day3.txt");
+    std::fstream in_file("day3/day3.txt");
 
     std::string line;
 
