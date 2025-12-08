@@ -19,7 +19,7 @@
         "name": "Advent of Code",
         "type": "cppdbg",
         "request": "launch",
-        "program": "${workspaceFolder}/build/aoc_day6.exe",
+        "program": "${workspaceFolder}/build/aoc_day7.exe",
         "args": [],
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}",
