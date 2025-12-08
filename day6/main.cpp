@@ -6,8 +6,6 @@
 #include <algorithm>
 #include <chrono>
 #include <sstream>
-#include <numeric>
-#include <deque>
 
 std::vector<std::vector<long>> parse_data_part1(std::vector<std::string> lines)
 {
@@ -16,10 +14,8 @@ std::vector<std::vector<long>> parse_data_part1(std::vector<std::string> lines)
     {
         // Number line
         int column = 0;
-
         std::istringstream iss(line);
 
-        int pos = data.size();
         data.push_back(std::vector<long>{});
         long value;
         // operator>> skips any amount of whitespace
@@ -30,7 +26,6 @@ std::vector<std::vector<long>> parse_data_part1(std::vector<std::string> lines)
                 data.push_back(std::vector<long>{});
             }
             data[column].push_back(value);
-            // std::cout << value << ", ";
             column++;
         }
     }
